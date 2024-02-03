@@ -1,97 +1,47 @@
-"""
-Database:
-
-CREATE DATABASE IF NOT EXISTS `funeral_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_czech_ci;
-
-USE `funeral_db`;
-
-CREATE TABLE IF NOT EXISTS `deceased` (
-    `deceasedID` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` NVARCHAR(100) NOT NULL,
-    `surname` NVARCHAR(100) NOT NULL,
-    `date_of_birth` DATE NOT NULL,
-    `date_of_death` DATE NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `funeral_service` (
-    `serviceID` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` NVARCHAR(100) NOT NULL,
-    `price` FLOAT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `participants` (
-    `participantID` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` NVARCHAR(100) NOT NULL,
-    `surname` NVARCHAR(100) NOT NULL,
-    `relationship` ENUM('family', 'friend', 'other') NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `cemetery` (
-    `cemeteryID` INT AUTO_INCREMENT PRIMARY KEY,
-    `name` NVARCHAR(100) NOT NULL,
-    `address` NVARCHAR(100) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS `funeral` (
-    `funeralID` INT AUTO_INCREMENT PRIMARY KEY,
-    `deceasedID` INT NOT NULL,
-    `serviceID` INT NOT NULL,
-    `cemeteryID` INT NOT NULL,
-    `date` DATETIME NOT NULL,
-    `participantID` INT,
-    FOREIGN KEY (`deceasedID`) REFERENCES `deceased`(`deceasedID`),
-    FOREIGN KEY (`serviceID`) REFERENCES `funeral_service`(`serviceID`),
-    FOREIGN KEY (`cemeteryID`) REFERENCES `cemetery`(`cemeteryID`),
-    FOREIGN KEY (`participantID`) REFERENCES `participants`(`participantID`)
-);
-
-CREATE TABLE IF NOT EXISTS `log` (
-    `logID` INT AUTO_INCREMENT PRIMARY KEY,
-    `date` DATETIME NOT NULL,
-    `message` TEXT NOT NULL
-);
-
-CREATE VIEW `funeral_view` AS
-SELECT `funeral`.`funeralID`, `deceased`.`name` AS `deceased_name`, `deceased`.`surname` AS `deceased_surname`, `funeral_service`.`name` AS `service_name`, `cemetery`.`name` AS `cemetery_name`, `funeral`.`date`
-FROM `funeral`
-JOIN `deceased` ON `funeral`.`deceasedID` = `deceased`.`deceasedID`
-JOIN `funeral_service` ON `funeral`.`serviceID` = `funeral_service`.`serviceID`
-JOIN `cemetery` ON `funeral`.`cemeteryID` = `cemetery`.`cemeteryID`;
-
-CREATE VIEW `log_view` AS
-SELECT `log`.`logID`, `log`.`date`, `log`.`message`
-FROM `log`;
-"""
-
-"""
-Uživatelské rozhraní nebo API musí umožňovat:
-
-    Vložení, smazání a úpravu nějaké informace, záznamu, který se ukládá do více než jedné tabulky.
-    Provést transakci nad více než jednou tabulkou. Například převod kreditních bodů mezi dvěma účty apod.
-    Vygenerovat souhrný report, který bude obsahovat smysluplná agregovaná data z alespoň tří tabulek Vaší databáze. Report musí mít hlavičku a patičku.
-    Import dat do min. dvou tabulek z formátu CSV, XML nebo JSON.
-    Nastavit celý program v konfiguračním souboru config.ini.
-"""
-
-# Importy
 import tkinter as tk
 from tkinter import ttk, simpledialog
 import mysql.connector
+from configparser import ConfigParser
+import configparser
+import os
+
+# Získání cesty k adresáři, ve kterém je umístěn hlavní skript
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Sestavení cesty k config.ini ve složce /config
+config_path = os.path.join(script_dir, '..', 'config', 'config.ini')
+
+# Načtení konfigurace
+config = configparser.ConfigParser()
+config.read(config_path)
+
+# Přečtení hodnot pro připojení k databázi ze souboru
+db_config = {
+    'host': config.get('Database', 'host'),
+    'user': config.get('Database', 'user'),
+    'password': config.get('Database', 'password'),
+    'database': config.get('Database', 'database'),
+}
+
+# Připojení k databázi
+db_connection = mysql.connector.connect(**db_config)
+cursor = db_connection.cursor()
 
 root = tk.Tk()
 root.title("Funeral Service")
 
-# Set the style for the GUI
 style = ttk.Style()
 style.configure("TButton", font=("Arial", 12), foreground="black")
 style.configure("TLabel", font=("Arial", 12), foreground="black")
 style.configure("TEntry", font=("Arial", 12), foreground="black")
 
-# Set the colors for the GUI
 root.configure(bg="#F0F0F0")
 style.configure("TButton", background="#4CAF50", foreground="black")
 style.configure("TLabel", background="#F0F0F0")
 style.configure("TEntry", background="white", foreground="black")
+
+# ... (zbytek kódu zůstává nezměněný)
+
 
 name_entry = ttk.Entry(root)
 surname_entry = ttk.Entry(root)
@@ -101,7 +51,6 @@ deceased_listbox = tk.Listbox(root)
 log_listbox = tk.Listbox(root)
 
 
-# připojení do databáze
 db_connection = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -111,7 +60,6 @@ db_connection = mysql.connector.connect(
 
 cursor = db_connection.cursor()
 
-# Vložení, smazání a úprava nějaké informace, záznamu, který se ukládá do více než jedné tabulky.
 class FuneralApp:
     def __init__(self, root):
         self.root = root
@@ -145,7 +93,7 @@ class FuneralApp:
     def show_summary_report(self):
         report = SummaryReport(self.root)
         report.generate_report()
-# Vygenerovat souhrný report, který bude obsahovat smysluplná agregovaná data z alespoň tří tabulek Vaší databáze. Report musí mít hlavičku a patičku.
+
 class SummaryReport:
     def __init__(self, parent):
         self.top = tk.Toplevel(parent)
@@ -401,4 +349,3 @@ if __name__ == "__main__":
     app = FuneralApp(root)
     root.geometry("800x600")
     root.mainloop()
-
