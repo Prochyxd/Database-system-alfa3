@@ -4,13 +4,20 @@ This project will allow user to work with database
 
 pip install mysql-connector-python
 
+**CHECKLIST ZADÁNÍ**
+
+- [x] Vložení, smazání a úpravu nějaké informace, záznamu, který se ukládá do více než jedné tabulky.
+- [x] Provést transakci nad více než jednou tabulkou.
+- [x] Vygenerovat souhrný report, který bude obsahovat smysluplná agregovaná data z alespoň tří tabulek Vaší databáze. Report musí mít hlavičku a patičku.
+- [ ] Import dat do min. dvou tabulek z formátu CSV, XML nebo JSON.
+- [ ] Nastavit celý program v konfiguračním souboru.
 
 **CHECKLIST PRO ODEVZDÁNÍ PROJEKTU**
-- [ ] Dokumentace obsahuje název projektu, jméno autora, jeho kontaktní údaje, datum vypracování, název školy a informaci, že se jedná o školní projekt.
+- [x] Dokumentace obsahuje název projektu, jméno autora, jeho kontaktní údaje, datum vypracování, název školy a informaci, že se jedná o školní projekt.
 - [ ] Dokumentace obsahuje nebo odkazuje na specifikaci požadavků uživatele na práci s aplikací nebo UML Use Case diagramy, které to popisují.
 - [ ] Dokumentace databáze obsahuje popis architektury aplikace pomocí návrhových vzorů nebo UML strukturálních diagramů, například Class diagramy, Deployment diagramy apod.
 - [ ] Dokumentace databáze obsahuje popis používání a chodu aplikace pomocí UML behaviorálních diagramů, například State diagramy, Activity diagramy apod.
-- [ ] Dokumentace obsahuje E-R model databáze, ze kterého jsou patrné názvy tabulek, atributů a jejich datové typy a další konfigurační volby, pokud aplikace databázi používá.
+- [x] Dokumentace obsahuje E-R model databáze, ze kterého jsou patrné názvy tabulek, atributů a jejich datové typy a další konfigurační volby, pokud aplikace databázi používá.
 - [ ] Dokumentace obsahuje schéma importovaných a exportovaných souborů, pokud aplikace databázi export a import používá, včetně povinných a nepovinných položek.
 - [ ] Dokumentace obsahuje informace o tom, jak se program konfiguruje, jaké konfigurační volby jsou přípustné a co dělají.
 - [ ] Dokumentace obsahuje popis instalace a spuštění aplikace, případně odkazuje na soubor README.txt, kde je to popsáno.
