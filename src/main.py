@@ -75,68 +75,30 @@ Uživatelské rozhraní nebo API musí umožňovat:
 
 # Importy
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, simpledialog
 import mysql.connector
 
-# Vytvoření okna
-window = tk.Tk()
-window.title("Funeral Services")
-window.geometry("800x600")
+root = tk.Tk()
+root.title("Funeral Service")
 
-# Vytvoření tabů
-tab_control = ttk.Notebook(window)
-tab1 = ttk.Frame(tab_control)
-tab2 = ttk.Frame(tab_control)
-tab3 = ttk.Frame(tab_control)
-tab4 = ttk.Frame(tab_control)
-tab5 = ttk.Frame(tab_control)
-tab6 = ttk.Frame(tab_control)
-tab7 = ttk.Frame(tab_control)
-tab8 = ttk.Frame(tab_control)
-tab9 = ttk.Frame(tab_control)
-tab10 = ttk.Frame(tab_control)
-tab11 = ttk.Frame(tab_control)
-tab12 = ttk.Frame(tab_control)
-tab13 = ttk.Frame(tab_control)
-tab14 = ttk.Frame(tab_control)
-tab15 = ttk.Frame(tab_control)
-tab16 = ttk.Frame(tab_control)
-tab17 = ttk.Frame(tab_control)
-tab18 = ttk.Frame(tab_control)
-tab19 = ttk.Frame(tab_control)
-tab20 = ttk.Frame(tab_control)
-tab21 = ttk.Frame(tab_control)
-tab22 = ttk.Frame(tab_control)
-tab23 = ttk.Frame(tab_control)
-tab24 = ttk.Frame(tab_control)
-tab25 = ttk.Frame(tab_control)
+# Set the style for the GUI
+style = ttk.Style()
+style.configure("TButton", font=("Arial", 12))
+style.configure("TLabel", font=("Arial", 12))
+style.configure("TEntry", font=("Arial", 12))
 
-tab_control.add(tab1, text="Deceased")
-tab_control.add(tab2, text="Funeral Service")
-tab_control.add(tab3, text="Participants")
-tab_control.add(tab4, text="Cemetery")
-tab_control.add(tab5, text="Funeral")
-tab_control.add(tab6, text="Log")
-tab_control.add(tab7, text="Funeral View")
-tab_control.add(tab8, text="Log View")
-tab_control.add(tab9, text="Insert Deceased")
-tab_control.add(tab10, text="Insert Funeral Service")
-tab_control.add(tab11, text="Insert Participant")
-tab_control.add(tab12, text="Insert Cemetery")
-tab_control.add(tab13, text="Insert Funeral")
-tab_control.add(tab14, text="Insert Log")
-tab_control.add(tab15, text="Update Deceased")
-tab_control.add(tab16, text="Update Funeral Service")
-tab_control.add(tab17, text="Update Participant")
-tab_control.add(tab18, text="Update Cemetery")
-tab_control.add(tab19, text="Update Funeral")
-tab_control.add(tab20, text="Update Log")
-tab_control.add(tab21, text="Delete Deceased")
-tab_control.add(tab22, text="Delete Funeral Service")
-tab_control.add(tab23, text="Delete Participant")
-tab_control.add(tab24, text="Delete Cemetery")
-tab_control.add(tab25, text="Delete Funeral")
+# Set the colors for the GUI
+root.configure(bg="#F0F0F0")
+style.configure("TButton", background="#4CAF50", foreground="white")
+style.configure("TLabel", background="#F0F0F0")
+style.configure("TEntry", background="white")
 
+name_entry = ttk.Entry(root)
+surname_entry = ttk.Entry(root)
+date_of_birth_entry = ttk.Entry(root)
+date_of_death_entry = ttk.Entry(root)
+deceased_listbox = tk.Listbox(root)
+log_listbox = tk.Listbox(root)
 
 # připojení do databáze
 db_connection = mysql.connector.connect(
@@ -149,19 +111,85 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor()
 
 # Vložení, smazání a úprava nějaké informace, záznamu, který se ukládá do více než jedné tabulky.
-def insert_deceased():
-    name = name_entry.get()
-    surname = surname_entry.get()
-    date_of_birth = date_of_birth_entry.get()
-    date_of_death = date_of_death_entry.get()
+class FuneralApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Funeral Database App")
+        self.create_widgets()
 
-    cursor.execute("INSERT INTO deceased (name, surname, date_of_birth, date_of_death) VALUES (%s, %s, %s, %s)", (name, surname, date_of_birth, date_of_death))
-    db_connection.commit()
+    def create_widgets(self):
+        ttk.Button(self.root, text="Insert Deceased", command=self.show_insert_deceased).grid(row=0, column=0, sticky="w")
 
-    log_message = f"Deceased {name} {surname} was inserted into the database."
-    cursor.execute("INSERT INTO log (date, message) VALUES (NOW(), %s)", (log_message,))
-    db_connection.commit()
+        # show log_listbox
+        cursor.execute("SELECT * FROM `log_view`")
+        log_list = cursor.fetchall()
+        for log in log_list:
+            log_listbox.insert(tk.END, log[1])
 
-    log_listbox.insert(tk.END, log_message)
+        log_listbox.grid(row=2, column=0, sticky="w", padx=10, pady=10)
 
+        
+
+    def show_insert_deceased(self):
+        form = InsertDeceasedForm(self.root)
+
+
+class InsertDeceasedForm:
+    def __init__(self, parent):
+        self.top = tk.Toplevel(parent)
+        self.top.title("Insert Deceased Form")
+
+        self.name_label = ttk.Label(self.top, text="Name")
+        self.surname_label = ttk.Label(self.top, text="Surname")
+        self.date_of_birth_label = ttk.Label(self.top, text="Date of Birth")
+        self.date_of_death_label = ttk.Label(self.top, text="Date of Death")
+
+        self.name_entry = ttk.Entry(self.top)
+        self.surname_entry = ttk.Entry(self.top)
+        self.date_of_birth_entry = ttk.Entry(self.top)
+        self.date_of_death_entry = ttk.Entry(self.top)
+
+        self.insert_button = ttk.Button(self.top, text="Insert", command=self.insert_deceased)
+        self.cancel_button = ttk.Button(self.top, text="Cancel", command=self.top.destroy)
+
+        self.name_label.grid(row=0, column=0, sticky="w", padx=10, pady=10)
+        self.surname_label.grid(row=1, column=0, sticky="w", padx=10, pady=10)
+        self.date_of_birth_label.grid(row=2, column=0, sticky="w", padx=10, pady=10)
+        self.date_of_death_label.grid(row=3, column=0, sticky="w", padx=10, pady=10)
+        
+        self.name_entry.grid(row=0, column=1, sticky="w", padx=10, pady=10)
+        self.surname_entry.grid(row=1, column=1, sticky="w", padx=10, pady=10)
+        self.date_of_birth_entry.grid(row=2, column=1, sticky="w", padx=10, pady=10)
+        self.date_of_death_entry.grid(row=3, column=1, sticky="w", padx=10, pady=10)
+
+        self.insert_button.grid(row=4, column=0, sticky="w", padx=10, pady=10)
+        self.cancel_button.grid(row=4, column=1, sticky="w", padx=10, pady=10)
+
+        # Set the colors for the form
+        self.top.configure(bg="#F0F0F0")
+        style.configure("TButton", background="#4CAF50", foreground="white")
+        style.configure("TLabel", background="#F0F0F0")
+        style.configure("TEntry", background="white")
+
+    def insert_deceased(self):
+        name = self.name_entry.get()
+        surname = self.surname_entry.get()
+        date_of_birth = self.date_of_birth_entry.get()
+        date_of_death = self.date_of_death_entry.get()
+
+        if name and surname and date_of_birth and date_of_death:
+            cursor.execute("INSERT INTO `deceased` (`name`, `surname`, `date_of_birth`, `date_of_death`) VALUES (%s, %s, %s, %s)", (name, surname, date_of_birth, date_of_death))
+            db_connection.commit()
+            cursor.execute("INSERT INTO `log` (`date`, `message`) VALUES (NOW(), 'Inserted deceased: {} {}')".format(name, surname))
+            db_connection.commit()
+            log_listbox.insert(tk.END, f"Inserted deceased: {name} {surname}")
+
+        else:
+            cursor.execute("INSERT INTO `log` (`date`, `message`) VALUES (NOW(), 'Failed to insert deceased because of missing some filled out fields')")
+            log_listbox.insert(tk.END, "All fields are required")
+
+if __name__ == "__main__":
+    app = FuneralApp(root)
+    root.geometry("500x500")  # Set the size of the GUI window
+    root.mainloop()
 
