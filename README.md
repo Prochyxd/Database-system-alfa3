@@ -1,12 +1,8 @@
 # Database-system-alfa3
 This project will allow user to work with database
 
-Zde je váš text přepracovaný v Markdown formátu:
 
 **CHECKLIST PRO ODEVZDÁNÍ PROJEKTU**
-
-Každý program, software nebo aplikace je z dlouhodobého hlediska jen tak kvalitní, jak kvalitně má zpracovanou dokumentaci. Doporučujeme proto při jejím zpracování myslet na níže uvedené body a držet se jich.
-
 - [ ] Dokumentace obsahuje název projektu, jméno autora, jeho kontaktní údaje, datum vypracování, název školy a informaci, že se jedná o školní projekt.
 - [ ] Dokumentace obsahuje nebo odkazuje na specifikaci požadavků uživatele na práci s aplikací nebo UML Use Case diagramy, které to popisují.
 - [ ] Dokumentace databáze obsahuje popis architektury aplikace pomocí návrhových vzorů nebo UML strukturálních diagramů, například Class diagramy, Deployment diagramy apod.
@@ -34,8 +30,8 @@ Pro kontrolu při odevzdání a exportu zdrojových kódů, včetně dalších s
 
 V případě, že váš projekt potřebuje ke spuštění vlastní relační databázi, je třeba ji exportovat tak, aby splňovala pravidla níže. Postup instalace/importu databáze doporučujeme popsat v souboru README.txt
 
-- [ ] Export databáze obsahuje DDL příkazy pro vytvoření databázového schématu/modelu.
-- [ ] Export databáze obsahuje DML příkazy pro vložení testovacích záznamů/dat.
-- [ ] Export databáze je uzavřen v transakci.
-- [ ] Export databáze obsahuje komentář se jménem projektu, autorem a jeho kontaktními údaji.
-- [ ] Export databáze je ve formátu SQL v jednom textovém souboru s příponou: .sql
+- [x] Export databáze obsahuje DDL příkazy pro vytvoření databázového schématu/modelu.
+- [x] Export databáze obsahuje DML příkazy pro vložení testovacích záznamů/dat.
+- [x] Export databáze je uzavřen v transakci.
+- [x] Export databáze obsahuje komentář se jménem projektu, autorem a jeho kontaktními údaji.
+- [x] Export databáze je ve formátu SQL v jednom textovém souboru s příponou: .sql

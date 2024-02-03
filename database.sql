@@ -1,5 +1,5 @@
-
--- Databáze pro Pohřebnictví  v MySQL workbench 8.0 CE
+-- Procházka Adam, C4c, prochazka7@spsejecna.cz
+-- Databáze pro Pohřebnictví v MySQL workbench 8.0 CE
 
 -- Vytvoř 6 tabulek s různými datovými typy (float, bool, enum, string, datetime).
 -- Implementuj alespoň jednu M:N vazbu mezi tabulkami.
@@ -65,3 +65,64 @@ JOIN `cemetery` ON `funeral`.`cemeteryID` = `cemetery`.`cemeteryID`;
 CREATE VIEW `log_view` AS
 SELECT `log`.`logID`, `log`.`date`, `log`.`message`
 FROM `log`;
+
+INSERT INTO `deceased` (`name`, `surname`, `date_of_birth`, `date_of_death`)
+VALUES ('Jan', 'Novák', '1980-01-01', '2020-01-01'),
+('Petr', 'Svoboda', '1970-01-01', '2020-01-01'),
+('Marie', 'Kovářová', '1990-01-01', '2020-01-01'),
+('Jana', 'Nováková', '1985-01-01', '2020-01-01'),
+('Pavel', 'Svoboda', '1975-01-01', '2020-01-01'),
+('Josef', 'Kovář', '1995-01-01', '2020-01-01'),
+('Jiří', 'Novák', '1980-01-01', '2020-01-01'),
+('Petr', 'Svoboda', '1970-01-01', '2020-01-01'),
+('Marie', 'Kovářová', '1990-01-01', '2020-01-01'),
+('Jana', 'Nováková', '1985-01-01', '2020-01-01'),
+('Pavel', 'Svoboda', '1975-01-01', '2020-01-01'),
+('Josef', 'Kovář', '1995-01-01', '2020-01-01');
+
+INSERT INTO `funeral_service` (`name`, `price`)
+VALUES ('Základní', 1000),
+('Standardní', 2000),
+('Luxusní', 3000);
+
+INSERT INTO `participants` (`name`, `surname`, `relationship`)
+VALUES ('Petr', 'Novák', 'family'),
+('Marie', 'Svobodová', 'family'),
+('Jana', 'Kovářová', 'family'),
+('Pavel', 'Novák', 'friend'),
+('Josef', 'Svoboda', 'friend'),
+('Jiří', 'Kovář', 'friend'),
+('Petr', 'Novák', 'family'),
+('Marie', 'Svobodová', 'family'),
+('Jana', 'Kovářová', 'family'),
+('Pavel', 'Novák', 'other'),
+('Josef', 'Svoboda', 'friend'),
+('Jiří', 'Kovář', 'friend');
+
+INSERT INTO `cemetery` (`name`, `address`)
+VALUES ('Hřbitov', 'Praha'),
+('Hřbitov', 'Brno'),
+('Hřbitov', 'Ostrava'),
+('Hřbitov', 'Plzeň'),
+('Hřbitov', 'Liberec'),
+('Hřbitov', 'Olomouc'),
+('Hřbitov', 'Ústí nad Labem'),
+('Hřbitov', 'Hradec Králové'),
+('Hřbitov', 'Pardubice'),
+('Hřbitov', 'Zlín'),
+('Hřbitov', 'Jihlava'),
+('Hřbitov', 'České Budějovice');
+
+INSERT INTO `funeral` (`deceasedID`, `serviceID`, `cemeteryID`, `date`, `participantID`)
+VALUES (1, 1, 1, '2020-01-01 12:00:00', 1),
+(2, 2, 2, '2020-01-01 12:00:00', 2),
+(3, 3, 3, '2020-01-01 12:00:00', 3),
+(4, 1, 4, '2020-01-01 12:00:00', 4),
+(5, 2, 5, '2020-01-01 12:00:00', 5),
+(6, 3, 6, '2020-01-01 12:00:00', 6),
+(7, 1, 7, '2020-01-01 12:00:00', 7),
+(8, 2, 8, '2020-01-01 12:00:00', 8),
+(9, 3, 9, '2020-01-01 12:00:00', 9),
+(10, 1, 10, '2020-01-01 12:00:00', 10),
+(11, 2, 11, '2020-01-01 12:00:00', 11),
+(12, 3, 12, '2020-01-01 12:00:00', 12);
