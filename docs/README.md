@@ -2,6 +2,9 @@
 This project will allow user to work with database
 
 
+pip install mysql-connector-python
+
+
 **CHECKLIST PRO ODEVZDÁNÍ PROJEKTU**
 - [ ] Dokumentace obsahuje název projektu, jméno autora, jeho kontaktní údaje, datum vypracování, název školy a informaci, že se jedná o školní projekt.
 - [ ] Dokumentace obsahuje nebo odkazuje na specifikaci požadavků uživatele na práci s aplikací nebo UML Use Case diagramy, které to popisují.
