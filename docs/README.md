@@ -45,3 +45,7 @@ V případě, že váš projekt potřebuje ke spuštění vlastní relační dat
 - [x] Export databáze je uzavřen v transakci.
 - [x] Export databáze obsahuje komentář se jménem projektu, autorem a jeho kontaktními údaji.
 - [x] Export databáze je ve formátu SQL v jednom textovém souboru s příponou: .sql
+
+**Test cases**
+- [ ] Testovací scénář ve formátu PDF pro spuštění aplikace, včetně nastavení a importu databázové struktury
+- [ ] 3 další testovací snénáře v PDF

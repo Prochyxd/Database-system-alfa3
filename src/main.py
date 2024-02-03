@@ -40,8 +40,6 @@ style.configure("TButton", background="#4CAF50", foreground="black")
 style.configure("TLabel", background="#F0F0F0")
 style.configure("TEntry", background="white", foreground="black")
 
-# ... (zbytek kódu zůstává nezměněný)
-
 
 name_entry = ttk.Entry(root)
 surname_entry = ttk.Entry(root)
