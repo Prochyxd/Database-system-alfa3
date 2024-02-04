@@ -69,5 +69,5 @@ V případě, že váš projekt potřebuje ke spuštění vlastní relační dat
 - [x] Export databáze je ve formátu SQL v jednom textovém souboru s příponou: .sql
 
 **Test cases**
-- [ ] Testovací scénář ve formátu PDF pro spuštění aplikace, včetně nastavení a importu databázové struktury
-- [ ] 3 další testovací snénáře v PDF
+- [x] Testovací scénář ve formátu PDF pro spuštění aplikace, včetně nastavení a importu databázové struktury
+- [x] 3 další testovací snénáře v PDF
