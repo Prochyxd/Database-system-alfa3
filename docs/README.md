@@ -1,8 +1,30 @@
 # Database-system-alfa3
+Adam Procházka, C4c, prochazka7@spsejecna.cz
 This project will allow user to work with database
 
+Spuštění Aplikace: 
 
-pip install mysql-connector-python
+Příprava Databáze: 
+
+    Ujistěte se, že máte spuštěný MySQL server. 
+
+    Vytvořte prázdnou databázi pro aplikaci. 
+
+Spuštění Aplikace: 
+
+    Otevřete příkazový řádek a přejděte do umístění hlavního skriptu (main.py). 
+
+    Spusťte aplikaci pomocí příkazu: 
+
+python main.py 
+
+Ověření Připojení: 
+
+    Aplikace se pokusí připojit k databázi podle nastavení v konfiguračním souboru. 
+
+Spouštění Aplikace: 
+
+    Po úspěšném připojení se otevře okno aplikace Funeral Service Database App. 
 
 **CHECKLIST ZADÁNÍ**
 
@@ -18,23 +40,23 @@ pip install mysql-connector-python
 - [x] Dokumentace databáze obsahuje popis architektury aplikace pomocí návrhových vzorů nebo UML strukturálních diagramů, například Class diagramy, Deployment diagramy apod.
 - [ ] Dokumentace databáze obsahuje popis používání a chodu aplikace pomocí UML behaviorálních diagramů, například State diagramy, Activity diagramy apod.
 - [x] Dokumentace obsahuje E-R model databáze, ze kterého jsou patrné názvy tabulek, atributů a jejich datové typy a další konfigurační volby, pokud aplikace databázi používá.
-- [ ] Dokumentace obsahuje schéma importovaných a exportovaných souborů, pokud aplikace databázi export a import používá, včetně povinných a nepovinných položek.
-- [ ] Dokumentace obsahuje informace o tom, jak se program konfiguruje, jaké konfigurační volby jsou přípustné a co dělají.
-- [ ] Dokumentace obsahuje popis instalace a spuštění aplikace, případně odkazuje na soubor README.txt, kde je to popsáno.
-- [ ] Dokumentace obsahuje popis všech chybových stavů, které mohou v aplikaci nastat, a případně i kódy chyb a popis postupu jejich řešení.
-- [ ] Dokumentace obsahuje výčet knihoven třetích stran, které program využívá.
-- [ ] Dokumentace obsahuje závěrečné resumé projektu.
-- [ ] Dokumentace je zpracována v jednom souboru s příponou .pdf nebo .md, případně jako HTML stránka se vstupním souborem index.html.
+- [x] Dokumentace obsahuje schéma importovaných a exportovaných souborů, pokud aplikace databázi export a import používá, včetně povinných a nepovinných položek.
+- [x] Dokumentace obsahuje informace o tom, jak se program konfiguruje, jaké konfigurační volby jsou přípustné a co dělají.
+- [x] Dokumentace obsahuje popis instalace a spuštění aplikace, případně odkazuje na soubor README.txt, kde je to popsáno.
+- [x] Dokumentace obsahuje popis všech chybových stavů, které mohou v aplikaci nastat, a případně i kódy chyb a popis postupu jejich řešení.
+- [x] Dokumentace obsahuje výčet knihoven třetích stran, které program využívá.
+- [x] Dokumentace obsahuje závěrečné resumé projektu.
+- [x] Dokumentace je zpracována v jednom souboru s příponou .pdf nebo .md, případně jako HTML stránka se vstupním souborem index.html.
 
 **Export programu a zdrojových kódů**
 
 Pro kontrolu při odevzdání a exportu zdrojových kódů, včetně dalších souborů potřebných pro běh programu, použijte níže uvedený seznam. Především dbájte na dobře pojmenovaní složek a souborů.
 
-- [ ] Export zdrojových kódů obsahuje rozumnou strukturu složek a modulů (src pro kód, test pro unit testy, doc pro dokumentaci, bin pro spustitelné soubory a skripty, apod.)
-- [ ] Export zdrojových kódů obsahuje řádné komentáře a/nebo dobře čitelný zdrojový kód s vhodně pojmenovanými třídami, proměnnými apod.
-- [ ] Export zdrojových kódů obsahuje soubor README.txt, ve kterém je uvedeno jméno projektu, autor a je popsáno, jak program instalovat a spustit.
-- [ ] Export zdrojových kódů obsahuje konfigurační a další soubory potřebné ke spuštění.
-- [ ] Export zdrojových kódů aplikace je uložen do jednoho archivu s příponou: .zip
+- [x] Export zdrojových kódů obsahuje rozumnou strukturu složek a modulů (src pro kód, test pro unit testy, doc pro dokumentaci, bin pro spustitelné soubory a skripty, apod.)
+- [x] Export zdrojových kódů obsahuje řádné komentáře a/nebo dobře čitelný zdrojový kód s vhodně pojmenovanými třídami, proměnnými apod.
+- [x] Export zdrojových kódů obsahuje soubor README.txt, ve kterém je uvedeno jméno projektu, autor a je popsáno, jak program instalovat a spustit.
+- [x] Export zdrojových kódů obsahuje konfigurační a další soubory potřebné ke spuštění.
+- [x] Export zdrojových kódů aplikace je uložen do jednoho archivu s příponou: .zip
 
 **Export databáze**
 
